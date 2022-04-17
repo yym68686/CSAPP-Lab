@@ -174,7 +174,9 @@ NOTES:
  *   Rating: 1
  */
 int nuaa_question1(int x) {
-  return 2;
+	x = x >> 1;
+	x = x << 1;
+  return x;
 }
 /* 
  *   nuaa_question2 - compare the nth byte of x and y, if it is same, return 0, if not, return 1
