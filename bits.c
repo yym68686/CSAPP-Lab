@@ -224,7 +224,11 @@ int nuaa_question4(int x, int n) {
  *   Rating: 2
  */
 unsigned nuaa_question5(unsigned uf) {
-  return 2;
+	unsigned y = uf & 0x7fffffff;
+	if (y > 0x7f800000)
+		return uf;
+	else
+		return y;
 }
 /* 
  * nuaa_question6 - Return bit-level equivalent of expression (int) f
@@ -239,5 +243,17 @@ unsigned nuaa_question5(unsigned uf) {
  *   Rating: 4
  */
 int nuaa_question6(unsigned uf) {
-  return 2;
+	int sign = -1, exp = 1, tail = 0, result = 1;
+	if ((uf & 0x7fffffff) > 0x4f000000) 
+		return 0x80000000u;
+	else {
+		exp = 150 - ((uf >> 23) & 0xff);
+		if ((uf & 0x80000000) == 0)
+			sign = 1;
+		if (exp > 23)
+			return 0;
+		tail = (uf & 0x007fffff) | 0x00800000;
+		result = tail >> exp;
+		return sign * result;
+	}
 }
