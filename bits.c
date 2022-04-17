@@ -209,7 +209,8 @@ int nuaa_question3(int x, int y) {
  *   Rating: 3 
  */
 int nuaa_question4(int x, int n) {
-  return 2;
+	int y = ~(((1 << 31) >> 31) << n);
+  return ((x >> (32 + (~n + 1))) & y) + (x << n);
 }
 /* 
  * nuaa_question5 - Return bit-level equivalent of absolute value of f for
