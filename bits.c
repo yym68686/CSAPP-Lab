@@ -189,7 +189,7 @@ int nuaa_question1(int x) {
  *   Rating: 2 
  */
 int nuaa_question2(int x, int y, int n) {
-  return 2;
+	return !!(((x ^ y) >> (n << 3)) & 0xff);
 }
 /* 
  *   nuaa_question3 - x && y
