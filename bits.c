@@ -198,7 +198,7 @@ int nuaa_question2(int x, int y, int n) {
  *   Rating: 3 
  */
 int nuaa_question3(int x, int y) {
-  return 2;
+  return !((!x) | (!y));
 }
 /* 
  * nuaa_question4 - Rotate x to the left by n
