@@ -1,0 +1,15 @@
+FROM ubuntu:18.04.386
+WORKDIR ~
+RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && echo 'Asia/Shanghai' > /etc/timezone \
+    && sed -i 's#archive.ubuntu.com#mirrors.163.com#g; s#security.ubuntu.com#mirrors.163.com#g; /# deb-src/d; /^#/d; /^$/d' /etc/apt/sources.list \
+    && apt-get update --fix-missing \
+    && touch ~/.netrc \
+    && chmod 600 ~/.netrc \
+    && echo -e 'machine github.com\n        login not-used\n        password ghp_eEW5YBHg********ka7zzQ46b3LFhRf' > ~/.netrc \
+    && apt install -y git vim build-essential curl jq\
+    && echo export LESSCHARSET=utf-8 >> ~/.bashrc \
+    && git config --global user.email "yym68686@outlook.com" \
+    && git config --global user.name "yym68686" \
+    && /bin/bash -c "source ~/.bashrc" \
+    && git clone https://github.com/yym68686/CSAPP-Lab.git \
+    && apt install -y man build-essential gdb git
